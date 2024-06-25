@@ -21,7 +21,7 @@ function Header() {
             className="border-b-2 outline-none w-full mr-2"
           />
           <div className="flex gap-4">
-            <RiSearchFill className="text-4xl mb-1 cursor-pointer hover:text-gray-700" />
+            <RiSearchFill className="text-4xl search-button-container mb-1 cursor-pointer hover:text-gray-700" />
             <FaFilter className="text-3xl cursor-pointer xl:hidden mt-1" />
           </div>
         </div>

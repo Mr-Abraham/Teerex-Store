@@ -1,49 +1,130 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  colorFilter,
+  genderFilter,
+  priceFilter,
+  setProductData,
+  typeFilter,
+} from "./store/useStore";
+import Item from "./Item";
 
 function Sidebar() {
+  const dispatch = useDispatch();
+  const definedColors = ["Red", "Blue", "Green", "Black"];
+  const definedGender = ["Men", "Women"];
+  const definedaTypes = ["Polo", "Hoodie", "Basic"];
+  const definedRanges = [
+    { key: "0-Rs250", value: 250 },
+    { key: "Rs251-Rs450", value: 450 },
+    { key: "Rs650", value: 650 },
+  ];
+  let clrs = [];
+  let genders = [];
+  let ranges = [];
+  let types = [];
   return (
     <div className="fixed w-[200px] border px-4 bg-white">
       <div>
         <section className="my-3 p-1">
-          <h1 className="my-2 text-xl text-gray-700">Colour</h1>
-          <input className="mr-2" type="checkbox" name="red" id="red" />
-          <label htmlFor="red">Red</label>
-          <br />
-          <input className="mr-2" type="checkbox" name="blue" id="blue" />
-          <label htmlFor="">Blue</label>
-          <br />
-          <input className="mr-2" type="checkbox" name="green" id="green" />
-          <label htmlFor="green">Green</label>
+          <h1 className="my-2 text-xl text-gray-700 font-semibold">Colour</h1>
+          {definedColors.map((color) => (
+            <div key={color} className="flex items-center mb-2">
+              <input
+                type="checkbox"
+                name={color}
+                id={color}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    clrs.push(color);
+                    dispatch(colorFilter(clrs));
+                  } else {
+                    clrs = clrs.filter((clr) => clr !== color);
+                    dispatch(colorFilter(clrs));
+                  }
+                }}
+              />
+              <label className="ml-2" htmlFor={color}>
+                {color}
+              </label>
+            </div>
+          ))}
         </section>
         <section className="my-3 p-1">
-          <h1 className="my-2 text-xl text-gray-700">Gender</h1>
-          <input className="mr-2" type="checkbox" name="men" id="men" />
-          <label htmlFor="men">Men</label>
-          <br />
-          <input className="mr-2" type="checkbox" name="women" id="women" />
-          <label htmlFor="women">Women</label>
+          <h1 className="my-2 text-xl text-gray-700 font-semibold">Gender</h1>
+          {definedGender.map((gender, ind) => (
+            <div key={ind}>
+              <input
+                type="checkbox"
+                name={gender}
+                id={gender}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    genders.push(gender);
+                    dispatch(genderFilter(genders));
+                  } else {
+                    genders = genders.filter((gend) => gend !== gender);
+                    dispatch(genderFilter(genders));
+                  }
+                }}
+              />
+              <label className="ml-2" htmlFor={gender}>
+                {gender}
+              </label>
+            </div>
+          ))}
         </section>
         <section className="my-3 p-1">
-          <h1 className="my-2 text-xl text-gray-700">Price</h1>
-          <input className="mr-2" type="checkbox" name="0-250" id="0-250" />
-          <label htmlFor="0-250">0-Rs250</label>
-          <br />
-          <input className="mr-2" type="checkbox" name="251-450" id="251-450" />
-          <label htmlFor="251-450">Rs251-450</label>
-          <br />
-          <input className="mr-2" type="checkbox" name="450" id="450" />
-          <label htmlFor="450">Rs 450</label>
+          <h1 className="my-2 text-xl text-gray-700 font-semibold">Price</h1>
+          <div>
+            {definedRanges.map((range, ind) => (
+              <div key={ind}>
+                <input
+                  type="checkbox"
+                  name={range.key}
+                  id={range.key}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      ranges.push(range.value);
+                      dispatch(priceFilter(ranges));
+                    } else {
+                      ranges = ranges.filter((item) => item !== range.value);
+                      dispatch(priceFilter(ranges));
+                    }
+                  }}
+                />
+                <label className="ml-2" htmlFor={range.key}>
+                  {range.key}
+                </label>
+              </div>
+            ))}
+          </div>
         </section>
         <section className="my-3 p-1">
-          <h1 className="my-2 text-xl text-gray-700">Type</h1>
-          <input className="mr-2" type="checkbox" name="polo" id="polo" />
-          <label htmlFor="polo">Polo</label>
-          <br />
-          <input className="mr-2" type="checkbox" name="hoodie" id="hoodie" />
-          <label htmlFor="hoodie">Hoodie</label>
-          <br />
-          <input className="mr-2" type="checkbox" name="basic" id="basic" />
-          <label htmlFor="basic">Basic</label>
+          <h1 className="my-2 text-xl text-gray-700 font-semibold">Type</h1>
+          <div>
+            {definedaTypes.map((type, ind) => (
+              <div key={ind}>
+                <input
+                  type="checkbox"
+                  name={type}
+                  id={type}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      types.push(type);
+                      dispatch(typeFilter(types));
+                    } else {
+                      types = types.filter((Item) => Item !== type);
+                      dispatch(typeFilter(types));
+                    }
+                  }}
+                />
+                <label className="ml-2" htmlFor={type}>
+                  {type}
+                </label>
+              </div>
+            ))}
+          </div>
         </section>
       </div>
     </div>
