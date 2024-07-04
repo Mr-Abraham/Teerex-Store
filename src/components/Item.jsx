@@ -1,8 +1,14 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addtoCart } from "./store/useStore";
 
 function Item() {
   const data = useSelector((state) => state.productdata);
+  const dispatch = useDispatch();
+  const [items, setItems] = useState([]);
+  let cartItems = [];
+  // let newItems = [];
+  // console.log(cartItems);
 
   return (
     <div className="grid grid-cols-4 gap-4 p-2 max-lg:grid-cols-2 max-md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 xl:ml-[200px]">
@@ -25,7 +31,13 @@ function Item() {
               <h2 className="text-xl font-semibold text-gray-600">
                 Price: {item.price}
               </h2>
-              <button className="px-3 py-2 text-sm rounded-md bg-gray-700 text-white">
+              <button
+                onClick={() => {
+                  // cartItems.unshift(item);
+                  // dispatch(addtoCart(cartItems));
+                }}
+                className="px-3 py-2 text-sm rounded-md bg-gray-700 text-white"
+              >
                 Add To Cart
               </button>
             </div>

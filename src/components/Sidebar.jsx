@@ -15,9 +15,9 @@ function Sidebar() {
   const definedGender = ["Men", "Women"];
   const definedaTypes = ["Polo", "Hoodie", "Basic"];
   const definedRanges = [
-    { key: "0-Rs250", value: 250 },
-    { key: "Rs251-Rs450", value: 450 },
-    { key: "Rs650", value: 650 },
+    { key: "0-Rs250", value: { min: 0, max: 250 } },
+    { key: "Rs251-Rs450", value: { min: 251, max: 450 } },
+    { key: "500", value: { min: 500, max: 999 } },
   ];
   let clrs = [];
   let genders = [];
@@ -86,6 +86,7 @@ function Sidebar() {
                   onChange={(e) => {
                     if (e.target.checked) {
                       ranges.push(range.value);
+                      // console.log(ranges);
                       dispatch(priceFilter(ranges));
                     } else {
                       ranges = ranges.filter((item) => item !== range.value);

@@ -21,7 +21,6 @@ function App() {
   };
   return (
     <>
-      <Header />
       <div className="flex">
         <Sidebar />
         <Item />
