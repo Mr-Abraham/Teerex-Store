@@ -12,6 +12,14 @@ function Cart() {
     setCartItems(Items);
   }, [addQty, Items, removeQty]);
 
+  if (Items.length === 0) {
+    return (
+      <h1 className="text-center text-6xl font-bold w-[100%] mb-10">
+        No Items Found
+      </h1>
+    );
+  }
+
   return (
     <div className="m-5">
       <h1 className="text-6xl mb-5 font-extrabold">Cart</h1>

@@ -25,7 +25,6 @@ function App() {
         <Sidebar />
         <Item />
       </div>
-      {/* <Footer /> */}
     </>
   );
 }

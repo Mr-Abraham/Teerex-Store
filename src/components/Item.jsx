@@ -6,6 +6,14 @@ function Item() {
   const data = useSelector((state) => state.productdata);
   const dispatch = useDispatch();
 
+  if (data.length === 0) {
+    return (
+      <h1 className="text-center text-6xl font-bold w-[100%] mb-10">
+        No Items Found
+      </h1>
+    );
+  }
+
   return (
     <div className="grid grid-cols-4 gap-4 p-2 max-lg:grid-cols-2 max-md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 xl:ml-[200px]">
       {data.map((item, index) => {
