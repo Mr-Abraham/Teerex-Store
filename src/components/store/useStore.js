@@ -6,6 +6,7 @@ const initialState = {
   mainProductData: [],
   productdata: [],
   CartData: [],
+  cart: [],
 };
 
 const userSlice = createSlice({
@@ -61,8 +62,19 @@ const userSlice = createSlice({
       }
     },
     search: (state, action) => {
+      const searchTerms = action.payload.toLowerCase().split(" ");
+      console.log(state.cart);
       state.productdata = state.mainProductData.filter((item) => {
-        const searchTerms = action.payload.toLowerCase().split(" ");
+        return searchTerms.every((term) => {
+          return (
+            item.name.toLowerCase().includes(term) ||
+            item.color.toLowerCase().includes(term) ||
+            item.type.toLowerCase().includes(term) ||
+            item.price <= term
+          );
+        });
+      });
+      state.CartData = state.cart.filter((item) => {
         return searchTerms.every((term) => {
           return (
             item.name.toLowerCase().includes(term) ||
@@ -75,11 +87,14 @@ const userSlice = createSlice({
     },
     addtoCart: (state, action) => {
       state.CartData = [...state.CartData, { ...action.payload, qty: 1 }];
+      state.cart = state.CartData;
+      console.log(state.cart);
     },
     removefromCart: (state, action) => {
       state.CartData = state.CartData.filter(
         (item) => item.id !== action.payload.id
       );
+      state.cart = state.CartData;
     },
     addQty: (state, action) => {
       state.CartData = state.CartData.map((item) => {
@@ -88,6 +103,7 @@ const userSlice = createSlice({
         }
         return item;
       });
+      state.cart = state.CartData;
     },
 
     removeQty: (state, action) => {
@@ -97,6 +113,7 @@ const userSlice = createSlice({
         }
         return item;
       });
+      state.cart = state.CartData;
     },
   },
 });

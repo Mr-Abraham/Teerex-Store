@@ -24,7 +24,7 @@ function Sidebar() {
   let ranges = [];
   let types = [];
   return (
-    <div className="fixed w-[200px] border px-4 bg-white">
+    <div className="fixed w-[200px] border px-4 bg-white z-10">
       <div>
         <section className="my-3 p-1">
           <h1 className="my-2 text-xl text-gray-700 font-semibold">Colour</h1>

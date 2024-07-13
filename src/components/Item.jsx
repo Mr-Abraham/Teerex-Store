@@ -12,7 +12,7 @@ function Item() {
         return (
           <div
             key={index}
-            className="px-3 py-2 rounded-lg border border-gray-100 shadow-sm hover:shadow-lg transition-all max-md:w-[90%] max-md:m-auto"
+            className=" px-3 py-2 rounded-lg border border-gray-100 shadow-sm hover:shadow-lg transition-all max-md:w-[90%] max-md:m-auto"
           >
             <img
               className="w-2/3 m-auto max-md:w-full"
@@ -29,7 +29,12 @@ function Item() {
               </h2>
               <button
                 onClick={() => {
-                  dispatch(addtoCart(item));
+                  if (item.quantity > 0) {
+                    dispatch(addtoCart(item));
+                  } else {
+                    alert("Out of Stock");
+                    return;
+                  }
                 }}
                 className="px-3 py-2 text-sm rounded-md bg-gray-700 text-white"
               >

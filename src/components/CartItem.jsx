@@ -36,6 +36,7 @@ function CartItem({ item, ind }) {
                 onClick={() => {
                   if (item.qty >= item.quantity) {
                     setError(true);
+                    alert(" You Can't Add More than Available Quantity");
                     return;
                   }
                   dispatch(addQty(item));
@@ -46,6 +47,12 @@ function CartItem({ item, ind }) {
               </button>
             </section>
           </section>
+          <button
+            onClick={() => dispatch(removefromCart(item))}
+            className="bg-red-400 px-3 py-1 rounded-lg mt-10"
+          >
+            Remove from Cart
+          </button>
         </div>
       </div>
       {/* <h1>Error: You Can't Add More than Available Quantity</h1> */}
