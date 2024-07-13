@@ -86,7 +86,6 @@ function Sidebar() {
                   onChange={(e) => {
                     if (e.target.checked) {
                       ranges.push(range.value);
-                      // console.log(ranges);
                       dispatch(priceFilter(ranges));
                     } else {
                       ranges = ranges.filter((item) => item !== range.value);

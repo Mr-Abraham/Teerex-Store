@@ -33,7 +33,6 @@ const userSlice = createSlice({
       }
     },
     priceFilter: (state, action) => {
-      console.log(action.payload);
       let minValue = action.payload[0].min;
       let maxValue = action.payload[0].max;
 
@@ -75,11 +74,29 @@ const userSlice = createSlice({
       });
     },
     addtoCart: (state, action) => {
-      state.CartData = action.payload;
-      console.log(action.payload);
+      state.CartData = [...state.CartData, { ...action.payload, qty: 1 }];
     },
     removefromCart: (state, action) => {
-      state.cart = state.cart.filter((item) => item.id !== action.payload);
+      state.CartData = state.CartData.filter(
+        (item) => item.id !== action.payload.id
+      );
+    },
+    addQty: (state, action) => {
+      state.CartData = state.CartData.map((item) => {
+        if (item.id == action.payload.id) {
+          return { ...item, qty: item.qty + 1 };
+        }
+        return item;
+      });
+    },
+
+    removeQty: (state, action) => {
+      state.CartData = state.CartData.map((item) => {
+        if (item.id === action.payload.id) {
+          return { ...item, qty: item.qty - 1 };
+        }
+        return item;
+      });
     },
   },
 });
@@ -92,6 +109,9 @@ export const {
   typeFilter,
   search,
   addtoCart,
+  removefromCart,
+  addQty,
+  removeQty,
 } = userSlice.actions;
 
 export default userSlice.reducer;
